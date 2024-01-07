@@ -23,9 +23,6 @@ const server = http.createServer(app);
 app.get("/", (req, res) => res.send("Hello World!"));
 server.listen(8080, () => console.log(`Server listening on port 8080!`));
 
-const MONGO_URL =
-  "mongodb+srv://admin:admin@cluster0.v7xheu4.mongodb.net/REST-API?retryWrites=true&w=majority";
-
 mongoose.Promise = Promise;
-mongoose.connect(MONGO_URL);
+mongoose.connect(process.env.MONGO_URL);
 mongoose.connection.on(`error`, (error: Error) => console.error(error));
