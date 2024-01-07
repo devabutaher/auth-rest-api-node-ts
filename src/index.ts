@@ -5,6 +5,7 @@ import cors from "cors";
 import express from "express";
 import http from "http";
 import mongoose from "mongoose";
+import router from "./router";
 
 const app = express();
 
@@ -24,5 +25,9 @@ app.get("/", (req, res) => res.send("Hello World!"));
 server.listen(8080, () => console.log(`Server listening on port 8080!`));
 
 mongoose.Promise = Promise;
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(
+  "mongodb+srv://admin:admin@cluster0.v7xheu4.mongodb.net/TS-REST-API?retryWrites=true&w=majority"
+);
 mongoose.connection.on(`error`, (error: Error) => console.error(error));
+
+app.use("/", router());
